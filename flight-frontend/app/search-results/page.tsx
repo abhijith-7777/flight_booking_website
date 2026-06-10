@@ -8,11 +8,12 @@ import {
 } from "next/navigation";
 
 import {
+  Suspense,
   useEffect,
   useState,
 } from "react";
 
-export default function SearchResultsPage() {
+function SearchResultsContent() {
   const params = useSearchParams();
 
   const router = useRouter();
@@ -401,5 +402,19 @@ export default function SearchResultsPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function SearchResultsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#0b1220] text-white">
+          Loading...
+        </div>
+      }
+    >
+      <SearchResultsContent />
+    </Suspense>
   );
 }

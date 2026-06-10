@@ -1,9 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 
-export default function ConfirmationPage() {
+function ConfirmationContent() {
   const params = useSearchParams();
 
   const bookingId =
@@ -241,5 +242,19 @@ export default function ConfirmationPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function ConfirmationPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#07111f] text-white">
+          Loading...
+        </div>
+      }
+    >
+      <ConfirmationContent />
+    </Suspense>
   );
 }
